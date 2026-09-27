@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>Global Online Database App</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4; }
+        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 400px; margin: auto; }
+        input { width: 90%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
+        button { padding: 10px 15px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #0056b3; }
+        .result-section { margin-top: 20px; }
+        h3 { margin-bottom: 10px; color: #333; }
+        ul { list-style-type: square; padding-left: 20px; }
+        li { padding: 5px 0; font-size: 18px; color: #555; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>ग्लोबल नामों की लिस्ट (Firebase) 🌍</h2>
+    <input type="text" id="nameInput" placeholder="नया नाम यहाँ लिखें...">
+    <br>
+    <button id="saveBtn">लिस्ट में जोड़ें</button>
+
+    <div class="result-section">
+        <h3>ऑनलाइन सेव किए गए सभी नाम:</h3>
+        <ul id="nameList">
+            <!-- यहाँ नाम लाइव लोड होंगे -->
+        </ul>
+    </div>
+</div>
+
+<!-- यहाँ से Firebase का असली कनेक्शन शुरू होता है -->
+<script type="module">
+    // Firebase की ज़रूरी चीज़ें इम्पोर्ट करें
+    import { initializeApp } from "https://gstatic.com";
+    import { getDatabase, ref, push, onValue } from "https://gstatic.com";
+
+    // ⚠️ महत्वपूर्ण: जब आप Firebase पर अकाउंट बनाएंगे, तो आपको ये 6 लाइनें मिलेंगी जिन्हें यहाँ बदलना होगा।
+    // अभी टेस्ट करने के लिए मैंने इसे एक डमी कॉन्फ़िगरेशन पर रखा है।
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_://firebaseapp.com",
+        databaseURL: "https://YOUR_://firebaseio.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_://appspot.com",
+        messagingSenderId: "YOUR_ID",
+        appId: "YOUR_APP_ID"
+    };
+
+    // Firebase को चालू करें
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const namesRef = ref(db, "names");
+
+    // 1. बटन क्लिक होने पर ऑनलाइन डेटाबेस में नाम भेजें
+    document.getElementById("saveBtn").addEventListener("click", function() {
+        let inputData = document.getElementById("nameInput").value.trim();
+        
+        if (inputData === "") {
+            alert("कृपया पहले नाम लिखें!");
+            return;
+        }
+
+        // Firebase Realtime Database में डेटा पुश करें
+        push(namesRef, inputData);
+        document.getElementById("nameInput").value = "";
+    });
+
+    // 2. लाइव डेटाबेस से नाम पढ़ें और स्क्रीन पर दिखाएं (यह रियल-टाइम है!)
+    onValue(namesRef, (snapshot) => {
+        const nameListElement = document.getElementById("nameList");
+        nameListElement.innerHTML = ""; // पुरानी लिस्ट साफ़ करें
+        
+        const data = snapshot.val();
+        if (data) {
+            // ऑब्जेक्ट में से सारे नाम निकालकर स्क्रीन पर दिखाएं
+            Object.values(data).forEach(name => {
+                let li = document.createElement("li");
+                li.innerText = name;
+                nameListElement.appendChild(li);
+            });
+        }
+    });
+</script>
+
+</body>
+</html>
