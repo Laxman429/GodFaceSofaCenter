@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>God Face Sofa</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+
+:root{
+--dark-pink:#d6336c;
+--dark-pink-transparent:rgba(214,51,108,0.95);
+--light:#fff;
+--dark:#222;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial,sans-serif;
+background:#f4f6f8;
+}
+
+/* Header */
+
+header{
+background:var(--dark-pink);
+color:var(--light);
+padding:10px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:61px;
+z-index:1000;
+}
+
+.branding{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.branding img{
+height:50px;
+width:50px;
+border-radius:50%;
+object-fit:cover;
+border:3px solid var(--dark-pink);
+background:#fff;
+}
+
+.branding h1{
+font-size:24px;
+}
+
+/* Menu */
+
+header nav ul{
+display:flex;
+gap:15px;
+list-style:none;
+}
+
+nav a{
+text-decoration:none;
+color:var(--light);
+font-weight:bold;
+font-size:14px;
+display:flex;
+align-items:center;
+gap:4px;
+padding:6px 4px;
+border-radius:6px;
+transition:0.3s;
+position:relative;
+}
+
+nav a::after{
+content:"";
+position:absolute;
+left:0;
+bottom:-3px;
+width:0;
+height:2px;
+background:#fff;
+transition:0.3s;
+}
+
+nav a:hover::after{
+width:100%;
+}
+
+nav a:hover{
+color:#ffd6e0;
+}
+
+.menu-toggle{
+display:none;
+font-size:24px;
+cursor:pointer;
+color:var(--light);
+}
+
+/* Slider */
+
+.slider{
+position:fixed;
+top:61px;
+bottom:60px;
+left:0;
+right:0;
+overflow:hidden;
+}
+
+.slides{
+display:flex;
+height:100%;
+transition:transform 1s ease-in-out;
+}
+
+.slide{
+min-width:100%;
+height:100%;
+background-size:cover;
+background-position:center;
+}
+
+/* Footer */
+
+footer{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:var(--dark-pink);
+color:#fff;
+display:flex;
+justify-content:center;
+align-items:center;
+height:60px;
+font-weight:bold;
+white-space:nowrap;
+}
+
+/* Popup */
+
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:2000;
+}
+
+.popup-box{
+background:#fff;
+padding:20px;
+border-radius:8px;
+text-align:center;
+width:260px;
+}
+
+.popup-box input{
+width:100%;
+padding:8px;
+margin-top:10px;
+}
+
+.popup-box button{
+margin-top:10px;
+padding:8px 15px;
+border:none;
+background:var(--dark-pink);
+color:#fff;
+cursor:pointer;
+border-radius:5px;
+}
+
+#errorMsg{
+color:red;
+margin-top:8px;
+display:none;
+font-size:14px;
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+header nav ul{
+flex-direction:column;
+position:fixed;
+top:62px;
+left:-250px;
+width:150px;
+padding:20px 17px;
+background:var(--dark-pink-transparent);
+border-top-right-radius:20px;
+border-bottom-right-radius:20px;
+transition:left 0.3s ease;
+}
+
+header nav ul.show{
+left:0;
+}
+
+.menu-toggle{
+display:block;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="branding">
+<img src="FSC.jpg">
+<h1>God Face Sofa</h1>
+</div>  
+
+<nav>
+<ul>
+
+<!--<li>
+<a href="#" onclick="openDashboard()">
+<i class="fa-solid fa-house"></i> Products<!--Dashboard 
+</a>
+</li>-->
+
+<li><a href="Products.html"><i class="fa-solid fa-house"></i> Products</a></li>
+<li><a href="MemberDetails.html"><i class="fa-solid fa-users"></i> Sale List</a></li>
+<li><a href="#"><i class="fa-solid fa-sack-dollar"></i> Stocks</a></li>
+<!--<li><a href="Month2026.html"><i class="fa-solid fa-money-bill-wave"></i> Year 2027</a></li>
+  MemberDetails.html/Month2025.html
+<li><a href="paid money to member.html"><i class="fa-solid fa-hand-holding-dollar"></i> Money Paid</a></li>
+<li><a href="#" onclick="openInterest()"><i class="fa-solid fa-percent"></i> Interest</a></li>
+<li><a href="terms and conditions.html"><i class="fa-solid fa-file-contract"></i> T&C</a></li>  -->
+<li><a href="Login.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+</ul>
+</nav>
+
+<div class="menu-toggle">
+<i class="fas fa-bars"></i>
+</div>
+
+</header>
+
+<section class="slider">
+
+<div class="slides">
+
+<div class="slide" style="background-image:url('https://images.pexels.com/photos/33349413/pexels-photo-33349413.jpeg')"></div>
+
+<div class="slide" style="background-image:url('https://images.pexels.com/photos/6480707/pexels-photo-6480707.jpeg')"></div>
+
+<div class="slide" style="background-image:url('https://images.pexels.com/photos/4401535/pexels-photo-4401535.jpeg')"></div>
+
+<div class="slide" style="background-image:url('https://images.pexels.com/photos/6758245/pexels-photo-6758245.jpeg')"></div>
+
+</div>
+
+</section>
+
+<footer>
+WELCOME TO GOD FACE SOFA CENTER  
+</footer>
+
+<!-- Password Popup -->
+
+<div class="popup" id="namePopup">
+
+<div class="popup-box">
+
+<h3>Password</h3>
+
+<input type="password" id="username" placeholder="Enter your Password">
+
+<button onclick="checkUser()">Enter</button>
+
+<p id="errorMsg">Wrong Password</p>
+
+</div> 
+
+</div>
+
+<script>
+
+const menuToggle=document.querySelector('.menu-toggle');
+const nav=document.querySelector('nav ul');
+
+menuToggle.addEventListener('click',()=>{
+nav.classList.toggle('show');
+});
+
+/* login system */
+
+let targetPage="";
+
+function openDashboard(){
+targetPage="Dashboard.html";
+document.getElementById("username").value="";
+document.getElementById("errorMsg").style.display="none";
+document.getElementById("namePopup").style.display="flex";
+}
+
+function openInterest(){
+targetPage="Interest.html";
+document.getElementById("username").value="";
+document.getElementById("errorMsg").style.display="none";
+document.getElementById("namePopup").style.display="flex";
+}
+
+function checkUser(){
+
+let input=document.getElementById("username");
+let user=input.value;
+
+if(user==="Sitaram" || user==="5592"){
+
+window.location.href=targetPage;
+
+}else{
+
+document.getElementById("errorMsg").style.display="block"; 
+
+}
+
+input.value="";
+
+} 
+
+/* Enter key login */ 
+
+document.getElementById("username").addEventListener("keypress",function(e){
+
+if(e.key==="Enter"){
+checkUser();
+}
+
+}); 
+
+/* slider */
+
+let currentSlide=0;
+
+const slides=document.querySelectorAll('.slide');
+
+const totalSlides=slides.length;
+
+function updateSlide(){
+
+document.querySelector('.slides').style.transform=translateX(-${currentSlide*100}%);
+
+}
+
+setInterval(()=>{
+
+currentSlide=(currentSlide+1)%totalSlides;
+
+updateSlide();
+
+},10000);
+
+</script>
+
+</body>
+</html>
